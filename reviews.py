@@ -144,7 +144,8 @@ def signout():
 
 @app.route('/', methods=['GET'])
 def index():
-    if current_user.is_anonymous():
+    print(current_user.is_anonymous)
+    if current_user.is_anonymous:
         return redirect("/signin")
     return render_template('index.html')
 

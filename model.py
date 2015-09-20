@@ -44,6 +44,7 @@ class Model():
             password = db.Column(db.String)
             authenticated = db.Column(db.Boolean())
             is_admin = db.Column(db.Boolean())
+            is_anonymous = False
 
             def __init__(self, name, email, is_admin=False):
                 self.name = name
@@ -59,9 +60,6 @@ class Model():
 
             def is_active(self) :
                 return self.is_authenticated()
-
-            def is_anonymous(self) :
-                return False
 
             def get_id(self) :
                 return self.email
