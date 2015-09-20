@@ -1,7 +1,6 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask import Markup
 
-
 import calendar
 
 from datetime import datetime, timedelta

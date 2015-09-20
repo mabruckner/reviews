@@ -146,7 +146,7 @@ def signout():
 def index():
     if current_user.is_anonymous():
         return redirect("/signin")
-    return render_template('index.html', rooms=model.Room.query.all())
+    return render_template('index.html')
 
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
@@ -171,8 +171,7 @@ def profile():
 def admin():
     if current_user.is_admin:
         users = model.User.query.all()
-        rooms = model.Room.query.all()
-        return render_template('admin.html', users=users, rooms=rooms)
+        return render_template('admin.html', users=users)
     # If the user isn't an admin, return them to /
     return abort(403)
 
@@ -240,7 +239,6 @@ app.secret_key = "Secret"
 
 
 ## Example Logging
-## app.logger.error("added: " + str(histories[i].room.title))
 if __name__ == "__main__":
     handler = RotatingFileHandler('log.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)
