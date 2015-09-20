@@ -11,32 +11,30 @@ class Model():
         self.db = SQLAlchemy(app)
         db = self.db
 
-        class Room(self.db.Model):
-            __tablename__ = 'rooms'
+        class Category(self.db.Model):
+            __tablename__ = 'category'
 
             id = db.Column(db.Integer, primary_key=True)
             title = db.Column(db.String)
-            number = db.Column(db.String)
-            short_description = db.Column(db.String)
-            long_description = db.Column(db.String)
-            image = db.Column(db.String)
 
-            def __init__(self, title, number, short_description="", long_description="", image=""):
+            def __init__(self, title):
                 self.title = title
-                self.number = number
-                self.short_description = short_description
-                self.long_description = long_description
-                self.image = image
-                #self.image = "/static/img/lab.jpg"
-                self.image = "/static/img/" + image
+        self.Category = Category
 
-            def __str__(self):
-                return "Room: {}".format((self.id, self.title, self.number, self.short_description, self.long_description))
+        class Review(self.db.Model):
+            __tablename__ = 'review'
 
-            def get_id_num(self):
-                return self.id
+            id = db.Column(db.Integer, primary_key=True)
+            text = db.Column(db.String)
+            rating = db.Column(db.Integer)
+            category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+            category = db.relationship('Category', backref=db.backref('Review', lazy='dynamic'))
 
-        self.Room = Room
+            def __init__(self, text, rating, category):
+                self.text = text
+                self.rating = rating
+                self.category = category
+        self.Review = Review
 
         class User(self.db.Model):
             __tablename__ = 'users'
