@@ -1,0 +1,9 @@
+{% extends "navbarbase.html" %}
+
+{% block navcontent %}
+    <div class="admin">
+        {% with users=users %}
+            {% include "view/_user.html" %}
+        {% endwith %}
+    </div>
+{% endblock %}

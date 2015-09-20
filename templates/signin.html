@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    {% if category == "message" %}
+        {% set category = "info" %}
+    {% endif %}
+    <div class="alert alert-{{ category }} alert-dismissible">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ message }}
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<div class="logincontainer">
+<form action="/signin" method="POST" class="form-signin" style="align:middle">
+    <div class="row">
+        <center><img style="PADDING-LEFT:10px;PADDING-RIGHT:10px;PADDING-BOTTOM:25px;" src="../static/img/pkilogo.png" alt="PKI Open House"></center>
+        {% if error != "" %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <input type="hidden" name="redirect" value="/"/>
+        <input type="hidden" name="redirect" value="/"/>
+        {{ form.csrf_token }}
+        <div style="PADDING-BOTTOM:10px;" class="input-group input-group-sm"><span class="input-group-addon" id="sizing-addon1"><center><img src="../static/img/glyphicons-4-user.png" width="16" height="16"></center></span></span>
+            {{ form.email(size=20,class="form-control",placeholder="Email") }}
+        </div>
+        <div style="PADDING-BOTTOM:10px;" class="input-group input-group-sm"><span class="input-group-addon" id="sizing-addon1"><img src="../static/img/glyphicons-204-lock.png" width="16" height="16"></center></span>
+            {{ form.password(placeholder="Password",size=20,class="form-control") }}
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-info btn-block">Sign in</button>
+        <a href="/signup" class="btn btn-info btn-block">Sign up</a>
+
+        <!--
+        (username: admin, password: password), <br/>
+        (username: user, password: password), <br/>
+        -->
+    </div>
+</form>
+</div>
+{% endblock %}

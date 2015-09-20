@@ -1,0 +1,86 @@
+@font-face {
+    font-family: keepCalm;
+    src: url('/static/css/fonts/KeepCalm-Medium.ttf')
+}
+
+@font-face {
+    font-family: opensans;
+    src: url('/static/css/fonts/opensans.woff')
+}
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-image: url('/static/img/congruent_outline.png');
+    font-family: opensans;
+}
+
+nav.navbar .username {
+    color: #ddd;
+}
+
+.form-signin {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: white;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+div.logincontainer {
+    margin-top:40px;
+}
+
+span.lab-tile {
+    boder: 1px solid black;
+}
+
+span.lab-tile ul {
+    list-style-type: none;
+}
+
+span.lab-tile span.lab-tile-desc {
+    color: #333;
+}
+
+a.lab-header {
+    font-size: 20pt;
+}
+
+.bubbleChart {
+  min-width: 100px;
+  max-width: 700px;
+  max-height: 700px;
+  min-height: 100px;
+  margin: 0 auto;
+}
+
+.lineChart{
+  min-width: 100px;
+  max-width: 700px;
+  max-height: 700px;
+  min-height: 100px;
+  margin: 0 auto;
+}
+
+.lab-thumb {
+    width: 100px;
+}
+
+div.room {
+    margin:20px;
+}
+
+div.room img {
+    max-width:90%;
+}
+
+a.navbar-brand {
+    font-family: keepCalm;
+}
+
+div.admin {
+    font-family: sans;
+}
