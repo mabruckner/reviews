@@ -105,7 +105,7 @@ def login():
                 db.session.commit()
                 login_user(user)
                 return redirect("/")
-        error = "incorrect email or password"
+        error = "Incorrect Email or Password"
     return render_template("signin.html",form = form,error = error);
 
 @app.route('/signup', methods=['GET','POST'])
