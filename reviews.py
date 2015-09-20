@@ -180,6 +180,12 @@ def admin():
     # If the user isn't an admin, return them to /
     return abort(403)
 
+@app.route('/reviews/<cat_id>', methods=['GET'])
+@login_required
+def get_reviews(cat_id):
+    reviews = model.Review.query.filter_by(category_id=cat_id,user_id=current_user.id).all()
+    return render_template('reviews.html', reviews=reviews)
+
 @app.route('/add/user', methods=['GET', 'POST'])
 @login_required
 def user_add():

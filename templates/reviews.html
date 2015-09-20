@@ -1,0 +1,9 @@
+{% extends "navbarbase.html" %}
+
+{% block navcontent %}
+    <ul>
+        {% for review in reviews %}
+        <li>{{review}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

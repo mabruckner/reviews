@@ -28,11 +28,14 @@ class Model():
             rating = db.Column(db.Integer)
             category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
             category = db.relationship('Category', backref=db.backref('Review', lazy='dynamic'))
+            user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+            user = db.relationship('User', backref=db.backref('Review', lazy='dynamic'))
 
-            def __init__(self, text, rating, category):
+            def __init__(self, text, rating, category, user):
                 self.text = text
                 self.rating = rating
                 self.category = category
+                self.user = user
         self.Review = Review
 
         class User(self.db.Model):
