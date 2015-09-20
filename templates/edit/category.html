@@ -1,0 +1,19 @@
+{% extends "navbarbase.html" %}
+
+{% block navcontent %}
+<form action="/edit/category/{{ category.id }}" method="POST">
+    <h2 class="form-signin-heading">Edit category</h2>
+    <div class="row">
+        <div class="form-group col-sm-7">
+            {{ form.title(class="form-control", placeholder="Title", class="form-control", value=category.title) }}
+        </div>
+
+        {{form.hidden_tag()}}
+
+        <div class="form-group col-sm-7">
+            <button type="submit" class="btn btn-primary btn-block">Add</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+

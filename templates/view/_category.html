@@ -1,0 +1,22 @@
+<div>
+    <a class="btn btn-primary" href="/add/category">Add category</a>
+    <br>
+    <br>
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>Title</th>
+        </tr>
+
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.title }}</td>
+            <td>
+                <a class="btn btn-danger" href="/delete/category/{{ category.id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                <a class="btn btn-default" href="/edit/category/{{ category.id }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

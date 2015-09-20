@@ -66,6 +66,9 @@ class EditUserForm(Form):
     ])
     confirm = PasswordField('Repeat password')
 
+class EditCategoryForm(Form):
+    title = TextField('title')
+
 def create_user(name, email, password, is_admin=False):
     newuser = model.User(name, email, is_admin)
     newuser.password = pbkdf2_sha256.encrypt(password)
@@ -172,7 +175,8 @@ def profile():
 def admin():
     if current_user.is_admin:
         users = model.User.query.all()
-        return render_template('admin.html', users=users)
+        categories = model.Category.query.all()
+        return render_template('admin.html', users=users, categories=categories)
     # If the user isn't an admin, return them to /
     return abort(403)
 
@@ -226,6 +230,57 @@ def user_delete(user_id):
         user = model.User.query.filter_by(id=user_id)
         flash("User {} deleted".format(user.first().name), "success")
         user.delete()
+        db.session.commit()
+        return redirect("/admin")
+    abort(403)
+
+@app.route('/add/category', methods=['GET', 'POST'])
+@login_required
+def category_add():
+    form = EditCategoryForm()
+    if current_user.is_admin:
+        if request.method == "POST":
+            if not form.validate_on_submit():
+                for error in form.errors:
+                    flash("Error for {}".format(error), "danger")
+                return render_template("add/category.html", form=form)
+
+            category = model.Category(form.title.data)
+
+            db.session.add(category)
+            db.session.commit()
+            flash("Category added", "success")
+            return redirect("/admin")
+        return render_template("add/category.html", form=EditCategoryForm())
+    abort(403)
+
+@app.route('/edit/category/<category_id>', methods=['GET', 'POST'])
+@login_required
+def category_edit(category_id):
+    form = EditCategoryForm()
+    if current_user.is_admin:
+        category = model.Category.query.filter_by(id=category_id).first()
+        if request.method == "POST":
+            if not form.validate_on_submit():
+                for error in form.errors:
+                    flash("Error for {}".format(error), "danger")
+                return render_template("add/category.html", form=form)
+
+            category.title = form.title.data
+
+            db.session.commit()
+            flash("Category edited", "success")
+            return redirect("/admin")
+        return render_template("edit/category.html", form=EditCategoryForm(), category=category)
+    abort(403)
+
+@app.route('/delete/category/<category_id>', methods=['GET'])
+@login_required
+def category_delete(category_id):
+    if current_user.is_admin:
+        category = model.Category.query.filter_by(id=category_id)
+        flash("Category {} deleted".format(user.first().title), "success")
+        category.delete()
         db.session.commit()
         return redirect("/admin")
     abort(403)

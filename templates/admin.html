@@ -5,5 +5,9 @@
         {% with users=users %}
             {% include "view/_user.html" %}
         {% endwith %}
+
+        {% with categories=categories %}
+            {% include "view/_category.html" %}
+        {% endwith %}
     </div>
 {% endblock %}
